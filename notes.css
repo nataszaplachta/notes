@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    font-family: 'Raleway';
+    background: linear-gradient(to right, #67b26f, #4ca2cd);
+
+}
+main {
+    
+}
+#new-note {
+    background: #444;
+    color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+.notes {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 40px;
+}
+.note {
+    color: #444;
+    background: #fff;
+    margin: 20px;
+    padding: 20px;
+    max-width: 25%;
+    overflow: hidden;
+}
+.note-title {
+    font-size: 18px;
+}
+.note-content {
+    padding: 10px 0;
+    font-family: 'Kalam';
+}
+.note-date {
+    font-size: 12px;
+
+}
