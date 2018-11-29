@@ -42,19 +42,23 @@ function showNotes() {
 
 function addNoteToNotesContainer(note, firstNote = false) {
     // wrzuć notatkę na stronę
+    let active ="";
     const noteDiv = document.createElement('div')
     noteDiv.classList.add('note')
     noteDiv.id = `note-${note.id}`
     const d = new Date(note.id)
 
-
+if (note.pinned) {
+    active = "active";
+}
     noteDiv.innerHTML = `
          <div class='note-title'>${note.title}</div>
          <div class='note-content'>${note.content}</div>
          <div class='note-date'>${d.toLocaleDateString()} ${d.toLocaleTimeString()}</div>
          <div class='note-menu'>
             <i class='far fa-trash-alt' id='n${note.id}'></i>
-            <i class="fas fa-thumbtack" id = "p${note.id}"></i>
+            <i class="fas fa-thumbtack ${active}" id = "p${note.id}"></i>
+            <i class="fas fa-square" id = "b${note.id}"></i>
          </div>
      `
 
@@ -67,17 +71,32 @@ function addNoteToNotesContainer(note, firstNote = false) {
         const firstNote = document.querySelector(`#note-${firstChildId}`)
         notesContainer.insertBefore(noteDiv, firstNote)
     }
-    // obsługa usuwania notatki - kliknięcie w krzyżyk
+    // obsługa przycisków
     document.querySelector(`#n${note.id}`).addEventListener('click', () => {
-        usunNotatke(note.id)
+        removeNote(note.id)
     })
 
-    document.querySelector(`#p${note.id}`).addEventListener('click', () => {
-        pinNote(note.id)
+    document.querySelector(`#b${note.id}`).addEventListener('click', () => {
+        changeToBlack(note.id)
     })
+
+        document.querySelector(`#p${note.id}`).addEventListener('click', (e) => {
+            pinNote(note.id)
+        })
+
 }
 
-function usunNotatke(id) {
+function changeToBlack(id){
+    const idx = notes.findIndex(note => {
+        return id == note.id
+    })
+    const noteToChangeColor = document.querySelector(`#note-${id}`)
+    noteToChangeColor.style.backgroundColor = "grey";
+    noteToChangeColor.style.color = "white"; 
+
+}
+
+function removeNote(id) {
     const idx = notes.findIndex(note => {
         return id == note.id
     })
@@ -88,13 +107,19 @@ function usunNotatke(id) {
 }
 
 function pinNote(id) {
+    const note = document.querySelector(`#p${id}`);
+    note.classList.toggle("active");
     const idx = notes.findIndex(note => {
         return id == note.id
     })
-    const noteToPin = document.querySelector(`#note-${id}`)
-    const firstChildId = notes[0].id
-    const firstNote = document.querySelector(`#note-${firstChildId}`)
-    notesContainer.insertBefore(noteToPin, firstNote)
+    notes[idx].pinned = !notes[idx].pinned
+    //const noteToPin = document.querySelector(`#note-${id}`)
+    // const firstChildId = notes[0].id
+    // const firstNote = document.querySelector(`#note-${firstChildId}`)
+    // notesContainer.insertBefore(noteToPin, firstNote)
+    // pinned = true;
+
+    saveNotesToLocalStorage()
 }
 
 function newNote() {
@@ -126,4 +151,5 @@ function Note(title = '', content = '') {
     this.title = title
     this.content = content
     this.id = Date.now()
+    this.pinned = false;
 }

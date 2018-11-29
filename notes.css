@@ -8,7 +8,7 @@ main {
 }
 #new-note {
     width: 60%;
-    background: rgba(68, 68, 68, 0.596);
+    background: rgba(68, 68, 68, 0.363);
     color: white;
     padding: 40px;
     display: flex;
@@ -32,7 +32,7 @@ main {
     overflow: hidden;
 }
 #new-note-add {
-    background: rgba(179, 178, 178, 0.747);
+    background: rgba(179, 178, 178, 0.452);
     border-radius: 25px;
     width: 200px;
     height: 50px;
@@ -51,7 +51,13 @@ main {
 .note-date {
     font-size: 12px;
 }
-
+.note-menu {
+    padding-top: 15px;
+    font-size: 12px;
+}
 i:hover { 
     background-color: rgba(37, 37, 37, 0.226);
+}
+.active {
+    color: rgb(145, 39, 113)
 }
