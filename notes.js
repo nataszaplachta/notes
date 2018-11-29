@@ -40,7 +40,7 @@ function showNotes() {
     })
 }
 
-function addNoteToNotesContainer(note, firstNote = false, pinned = false) {
+function addNoteToNotesContainer(note, firstNote = false) {
     // wrzuć notatkę na stronę
     const noteDiv = document.createElement('div')
     noteDiv.classList.add('note')
@@ -57,14 +57,10 @@ function addNoteToNotesContainer(note, firstNote = false, pinned = false) {
             <i class="fas fa-thumbtack" id = "p${note.id}"></i>
          </div>
      `
-  
+
 
     if (!firstNote) {
         notesContainer.appendChild(noteDiv)
-    }
-    else if (!pinned) {
-        const firstNote = notes[0];
-        notesContainer.insertBefore(noteDiv,firstNote)
     }
     else {
         const firstChildId = notes[0].id
@@ -89,6 +85,16 @@ function usunNotatke(id) {
     const noteDivToDelete = document.querySelector(`#note-${id}`)
     notesContainer.removeChild(noteDivToDelete)
     saveNotesToLocalStorage()
+}
+
+function pinNote(id) {
+    const idx = notes.findIndex(note => {
+        return id == note.id
+    })
+    const noteToPin = document.querySelector(`#note-${id}`)
+    const firstChildId = notes[0].id
+    const firstNote = document.querySelector(`#note-${firstChildId}`)
+    notesContainer.insertBefore(noteToPin, firstNote)
 }
 
 function newNote() {

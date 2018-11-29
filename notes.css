@@ -1,18 +1,21 @@
 body {
     margin: 0;
     font-family: 'Raleway';
-    background: linear-gradient(to right, #67b26f, #4ca2cd);
-
+    background: linear-gradient(to right, #c9a4bf, #8b567e);
 }
 main {
     
 }
 #new-note {
-    background: #444;
+    width: 60%;
+    background: rgba(68, 68, 68, 0.596);
     color: white;
     padding: 40px;
     display: flex;
     flex-direction: column;
+    border-radius: 50px;
+    align-content: center;
+    justify-content: center;
 }
 .notes {
     display: flex;
@@ -20,6 +23,7 @@ main {
     padding: 40px;
 }
 .note {
+    border-radius: 25px;
     color: #444;
     background: #fff;
     margin: 20px;
@@ -27,14 +31,27 @@ main {
     max-width: 25%;
     overflow: hidden;
 }
+#new-note-add {
+    background: rgba(179, 178, 178, 0.747);
+    border-radius: 25px;
+    width: 200px;
+    height: 50px;
+    font-family: 'Raleway';
+    text-transform: uppercase;
+}
 .note-title {
+    border-radius: 10px;
     font-size: 18px;
 }
 .note-content {
+    border-radius: 10px;
     padding: 10px 0;
     font-family: 'Kalam';
 }
 .note-date {
     font-size: 12px;
+}
 
+i:hover { 
+    background-color: rgba(37, 37, 37, 0.226);
 }
